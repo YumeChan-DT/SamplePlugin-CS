@@ -13,4 +13,8 @@
     <Copyright>MIT License</Copyright>
   </PropertyGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\Nodsoft.YumeChan.PluginBase\Nodsoft.YumeChan.PluginBase.csproj" />
+  </ItemGroup>
+
 </Project>
