@@ -5,32 +5,28 @@ using Nodsoft.YumeChan.PluginBase;
 namespace Nodsoft.YumeChan.PluginSampleCS
 {
 	// This Class defines the Plugin, and makes it visible to the Loader.
-	public class PluginManifest : IPlugin // Class MUST be set as public to get picked up by the Loader.
+	public class PluginManifest : Plugin // This Class MUST be set as public to get picked up by the Plugin Loader.
 	{
-		// For Good principle, do not change a thing here, unless your Versionning has to be different from that of the Assembly.
-		// Consider changing your Version within the Assembly instead.
-		public Version PluginVersion => typeof(PluginManifest).Assembly.GetName().Version;
+		// This defines your Plugin's Display name.
+		public override string PluginDisplayName { get; } = "YumeChan : Sample Plugin";
 
-		public string PluginDisplayName { get; } = "YumeChan : Sample Plugin";
+		// This flag defines whether your Plugin should be shown to the general public or not.
+		// Still shown to Server Operators, this is useful for security plugins, or plugins requiring covert operation.
+		public override bool PluginStealth { get; } = false;
 
-		public bool PluginStealth { get; } = false;
-
-		// This is handled solely by the LoadPlugin() and UnloadPlugin() Methods below.
-		public bool PluginLoaded { get; private set; } 
-
-		public Task LoadPlugin()
+		public override async Task LoadPlugin()
 		{
 			//Here goes the Loading Logic, if some loading procedure is needed. Treat it as a Ctor.
 
-			PluginLoaded = true;
-			return Task.CompletedTask;
+
+			await base.LoadPlugin(); // This method call sets Plugin.PluginLoaded to true.
 		}
-		public Task UnloadPlugin()
+		public override async Task UnloadPlugin()
 		{
 			//Here goes the Unloading Logic, if some unloading (e.g: Disposal) is needed. Treat it as a Dtor (~).
 
-			PluginLoaded = false;
-			return Task.CompletedTask;
+
+			await base.UnloadPlugin(); // This method call resets Plugin.PluginLoaded to false.
 		}
 	}
 }
