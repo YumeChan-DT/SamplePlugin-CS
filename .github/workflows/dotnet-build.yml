@@ -6,7 +6,7 @@ on:
 
 
 env:
-  YumeChan_PluginsLocation: ~/build
+  YumeChan_PluginsLocation: build
 
 jobs:
   build:
